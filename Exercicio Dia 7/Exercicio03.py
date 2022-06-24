@@ -12,4 +12,5 @@ dados_manipulavel = valor_json()
 estadio = dados_manipulavel["copa-do-brasil"][0]["estadio"]["nome_popular"]
 placar = dados_manipulavel["copa-do-brasil"][0]["placar"]
 status = dados_manipulavel["copa-do-brasil"][0]["status"]
+
 print('Estádio: ', estadio, "\nPlacar: ", placar,"\nStatus: ",status)
