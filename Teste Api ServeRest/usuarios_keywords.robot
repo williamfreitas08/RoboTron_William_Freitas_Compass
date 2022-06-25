@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation       Keywords e Variáveis para Ações do enpoint de usuarios
 Library             RequestsLibrary
+Resource            ./common.robot
 
 *** Variables ***
 ${nome_do_usuario}          herbert richards
@@ -61,3 +62,16 @@ DELETE Endpoint /usuarios
     ${response}             DELETE On Session          serverest           /usuarios 
     Log to Console          Response: ${response.content}
     Set Global Variable     ${response}
+
+Validar Quantidade "${quantidade}"
+    Should Be Equal         ${response.json()["quantidade"]}    ${quantidade}
+
+Validar Se Mensagem Contem "${palavra}"
+    Should Contain          ${response.json()["message"]}       ${palavra}
+
+Printar Conteudo Response
+    Log To Console      Response: ${response.json()["usuarios"][0]["nome"]}
+
+Criar Usuario Estatico Valido
+    ${json}            Importar JSON Estatico           json_usuario_ex.json
+    ${payload}         Set Variable         $
