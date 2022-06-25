@@ -32,6 +32,7 @@ Cenario: DELETE Deletar usuario 200
     Criar Sessao
     DELETE Endpoint /usuarios
     Validar Status Code "200"
+    
 Cenario: POST Realizar Login 200
     [Tags]      POSTLOGIN
     Criar Sessao
