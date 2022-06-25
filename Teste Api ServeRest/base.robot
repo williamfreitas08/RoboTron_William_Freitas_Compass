@@ -1,11 +1,7 @@
 *** Settings ***
 Documentation       Arquivo simples para requisições HTTP em APIs
 Library             RequestsLibrary
-
-*** Variables ***
-${nome_do_usuario}          herbert richards
-${senha_do_usuario}         teste123
-${email_do_usuario}         testeteste@gmail.com
+Resource            ./usuarios.keywords.robot
 
 #Sessão para criação dos cenários de teste
 *** Test Cases ***
@@ -40,27 +36,6 @@ Cenario: DELETE Deletar usuario 200
 *** Keywords ***
 Criar Sessao
     Create Session          serverest           http://localhost:3000
-
-GET Endpoint /usuarios
-    ${response}             GET On Session      serverest       /usuarios
-    Set Global Variable     ${response}
-
-POST Endpoint /usuarios
-    &{payload}              Create Dictionary       nome=${nome_do_usuario}    email=${email_do_usuario}     password=${senha_do_usuario}      administrador=true
-    ${response}             POST On Session      serverest       /usuarios      data=&{payload}
-    Log to Console          Response: ${response.content}
-    Set Global Variable     ${response}
-
-PUT Endpoint /usuarios
-    &{payload}              Create Dictionary       nome=adelma oliveira    email=adelma@gmail.com     password=132345      administrador=true
-    ${response}             PUT On Session          serverest           /usuarios       data=&{payload}
-    Log to Console          Response: ${response.content}
-    Set Global Variable     ${response}
-
-DELETE Endpoint /usuarios
-    ${response}             DELETE On Session          serverest           /usuarios 
-    Log to Console          Response: ${response.content}
-    Set Global Variable     ${response}
 
 Validar Status Code "${statuscode}"
     Should Be True          ${response.status_code} == ${statuscode}
