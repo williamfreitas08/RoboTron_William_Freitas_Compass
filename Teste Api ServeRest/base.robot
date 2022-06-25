@@ -2,6 +2,8 @@
 Documentation       Arquivo simples para requisições HTTP em APIs
 Library             RequestsLibrary
 Resource            ./usuarios.keywords.robot
+Resource            ./login_keywords.robot
+Resource            ./produtos_keywords.robot
 
 #Sessão para criação dos cenários de teste
 *** Test Cases ***
@@ -30,6 +32,18 @@ Cenario: DELETE Deletar usuario 200
     Criar Sessao
     DELETE Endpoint /usuarios
     Validar Status Code "200"
+Cenario: POST Realizar Login 200
+    [Tags]      POSTLOGIN
+    Criar Sessao
+    POST Endpoint /Login
+    Validar Status Code "200"
+
+Cenario: POST Criar Produto 201
+    [Tags]       POSTPRODUTO
+    Criar Sessao
+    POST Endpoint /produtos
+    Validar Status Code "201"
+
 
 
 #Sessão para criação de Keywords Personalizadas
