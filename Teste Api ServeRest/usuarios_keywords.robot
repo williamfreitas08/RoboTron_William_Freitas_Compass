@@ -1,41 +1,12 @@
 *** Settings ***
 Documentation       Keywords e Variáveis para Ações do enpoint de usuarios
-Library             RequestsLibrary
 Resource            ./common.robot
 
 *** Variables ***
-${nome_do_usuario}          herbert richards
+${nome_do_usuario}          erbert rjjichards
 ${senha_do_usuario}         teste123
-${email_do_usuario}         testeteste@gmail.com
-
-#Sessão para criação dos cenários de teste
-*** Test Cases ***
-Cenario: GET Todos os usuarios 200
-    [Tags]      GET
-    Criar Sessao
-    GET Endpoint /usuarios
-    Validar Status Code "200"
-    Validar Quantidade "${2}"
-    Printar Conteudo Response
-
-Cenario: POST Cadastrar usuario 201
-    [Tags]      POST
-    Criar Sessao
-    POST Endpoint /usuarios
-    Validar Status Code "201"
-
-Cenario: PUT Editar usuario 200
-    [Tags]      PUT
-    Criar Sessao
-    PUT Endpoint /usuarios
-    Validar Status Code "200"
-
-Cenario: DELETE Deletar usuario 200
-    [Tags]      DELETE
-    Criar Sessao
-    DELETE Endpoint /usuarios
-    Validar Status Code "200"
-
+${email_do_usuario}         testesteste@gmail.com
+${_id}                      0uxuPY0cbmQhpEz1
 
 #Sessão para criação de Keywords Personalizadas
 *** Keywords ***
@@ -45,21 +16,28 @@ Criar Sessao
 GET Endpoint /usuarios
     ${response}             GET On Session      serverest       /usuarios
     Set Global Variable     ${response}
+    Log to Console          Response: ${response.content}
 
 POST Endpoint /usuarios
-    &{payload}              Create Dictionary       nome=${nome_do_usuario}    email=${email_do_usuario}     password=${senha_do_usuario}      administrador=true
-    ${response}             POST On Session      serverest       /usuarios      data=&{payload}
+    &{payload}              Create Dictionary        nome=${nome_do_usuario}         email=${email_do_usuario}        password=${senha_do_usuario}          administrador=true
+    ${response}             POST On Session          serverest        /usuarios       data=&{payload}
     Log to Console          Response: ${response.content}
     Set Global Variable     ${response}
 
 PUT Endpoint /usuarios
     &{payload}              Create Dictionary       nome=adelma oliveira    email=adelma@gmail.com     password=132345      administrador=true
-    ${response}             PUT On Session          serverest           /usuarios       data=&{payload}
+    ${response}             PUT On Session          serverest           /usuarios/zfCCAA8lBwGVEAhU       data=&{payload}
     Log to Console          Response: ${response.content}
     Set Global Variable     ${response}
 
-DELETE Endpoint /usuarios
-    ${response}             DELETE On Session          serverest           /usuarios 
+GET Buscar /usuarios/_id
+    ${response}             GET On Session         serverest    /usuarios/0uxuPY0cbmQhpEz1   
+    ${_id_usuarios}         Set Variable               ${response.json()["_id"]}
+    Log to Console          Response: ${response.content}
+    Set Global Variable     ${response} 
+
+DELETE Endpoint /usuarios 
+    ${response}             DELETE On Session          serverest           /usuarios/lDrnxfsSLmM2bJaY 
     Log to Console          Response: ${response.content}
     Set Global Variable     ${response}
 

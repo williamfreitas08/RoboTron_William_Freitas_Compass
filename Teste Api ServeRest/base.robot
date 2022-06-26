@@ -1,25 +1,32 @@
 *** Settings ***
 Documentation       Arquivo simples para requisições HTTP em APIs
 Library             RequestsLibrary
-Resource            ./usuarios.keywords.robot
+Resource            ./usuarios_keywords.robot
 Resource            ./login_keywords.robot
 Resource            ./produtos_keywords.robot
 
 #Sessão para criação dos cenários de teste
 *** Test Cases ***
+### ENPOINT/usuarios ###
 Cenario: GET Todos os usuarios 200
     [Tags]      GET
     Criar Sessao
     GET Endpoint /usuarios
     Validar Status Code "200"
-    Validar Quantidade "${2}"
+    Validar Quantidade "${3}"
     Printar Conteudo Response
 
 Cenario: POST Cadastrar usuario 201
     [Tags]      POST
     Criar Sessao
-    POST Endpoint /usuarios
+    POST Endpoint/usuarios
     Validar Status Code "201"
+
+Cenario: GET Buscar /usuarios/_id
+    [Tags]      GETUSUARIOID
+    Criar Sessao
+    GET Buscar /usuarios/_id
+    Validar Status Code "200"
 
 Cenario: PUT Editar usuario 200
     [Tags]      PUT
@@ -33,11 +40,18 @@ Cenario: DELETE Deletar usuario 200
     DELETE Endpoint /usuarios
     Validar Status Code "200"
 
+### ENPOINT/login ###
 Cenario: POST Realizar Login 200
     [Tags]      POSTLOGIN
     Criar Sessao
     POST Endpoint /login
     Validar Status Code "200"
+
+Cenario: POST Realizar Login email já cadastrado 400
+    [Tags]      POSTLOGINVALIDO
+    Criar Sessao
+    POST Endpoint /login
+    Validar Status Code "400"
 
 Cenario: POST Criar Produto 201
     [Tags]       POSTPRODUTO
@@ -46,6 +60,7 @@ Cenario: POST Criar Produto 201
     POST Endpoint /produtos
     Validar Status Code "201"
 
+### ENPOINT/produtos ###
 Cenario: DELETE Excluir Produto 200
     [Tags]      DELETEPRODUTO
     Criar Sessao

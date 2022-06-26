@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation             Keywords e Variaveis para Ações Gerais
 Library                   OperatingSystem
+Library                   RequestsLibrary
 
 *** Keywords ***
 Validar Status Code "${statuscode}"
