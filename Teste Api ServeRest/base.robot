@@ -13,9 +13,9 @@ Cenario: GET Todos os usuarios 200
     Criar Sessao
     GET Endpoint /usuarios
     Validar Status Code "200"
-    Validar Quantidade "${3}"
+    Validar Quantidade "${2}"
     Printar Conteudo Response
-
+    
 Cenario: POST Cadastrar usuario 201
     [Tags]      POST
     Criar Sessao

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.1 on win32)" generated="20220626 12:25:37.078" rpa="false" schemaversion="3">
+<suite id="s1" name="Base" source="d:\Desktop\RoboTron_William_Freitas_Compass\Teste Api ServeRest\base.robot">
+<test id="s1-t1" name="Cenario: POST Realizar Login 200" line="44">
+<kw name="Criar Sessao">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>serverest</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220626 12:25:37.460" level="INFO">Creating Session using : alias=serverest, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220626 12:25:37.460" endtime="20220626 12:25:37.461"/>
+</kw>
+<status status="PASS" starttime="20220626 12:25:37.460" endtime="20220626 12:25:37.461"/>
+</kw>
+<kw name="POST Endpoint /login" library="login_keywords">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{payload}</var>
+<arg>email=${email_para_login}</arg>
+<arg>password=${password_para_login}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220626 12:25:37.463" level="INFO">&amp;{payload} = { email=fulano@qa.com | password=teste }</msg>
+<status status="PASS" starttime="20220626 12:25:37.462" endtime="20220626 12:25:37.463"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>data=&amp;{payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220626 12:25:37.524" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '36', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=fulano%40qa.com&amp;password=teste 
+ </msg>
+<msg timestamp="20220626 12:25:37.524" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': 'c595da22-fc6d-4ce4-b276-c076532b76ad', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '265', 'Date': 'Sun, 26 Jun 2022 15:25:37 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNjU2MjU3MTM3LCJleHAiOjE2NTYyNTc3Mzd9.2ICBCHeTXZcxM3Ek9FTQ0Fop2bAHvHT1yxo1Pm8p9VI"
+} 
+ </msg>
+<msg timestamp="20220626 12:25:37.524" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220626 12:25:37.463" endtime="20220626 12:25:37.524"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Response: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220626 12:25:37.525" endtime="20220626 12:25:37.527"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220626 12:25:37.528" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220626 12:25:37.527" endtime="20220626 12:25:37.528"/>
+</kw>
+<status status="PASS" starttime="20220626 12:25:37.461" endtime="20220626 12:25:37.528"/>
+</kw>
+<kw name="Validar Status Code &quot;200&quot;" library="common" sourcename="Validar Status Code &quot;${statuscode}&quot;">
+<kw name="Should Be True" library="BuiltIn">
+<arg>${response.status_code} == ${statuscode}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20220626 12:25:37.529" endtime="20220626 12:25:37.530"/>
+</kw>
+<status status="PASS" starttime="20220626 12:25:37.529" endtime="20220626 12:25:37.531"/>
+</kw>
+<tag>POSTLOGIN</tag>
+<status status="PASS" starttime="20220626 12:25:37.459" endtime="20220626 12:25:37.531"/>
+</test>
+<doc>Arquivo simples para requisições HTTP em APIs</doc>
+<status status="PASS" starttime="20220626 12:25:37.081" endtime="20220626 12:25:37.533"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">POSTLOGIN</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Base">Base</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,14 +1,15 @@
 *** Settings ***
-Documentation
+Documentation       Keywords e Variaveis para Ações do endpoint login
+Library             RequestsLibrary
 
 *** Variables ***
-${email_para_login}            flano@qa.com
+${email_para_login}            fulano@qa.com
 ${password_para_login}         teste
 
 *** Keywords ***
 POST Endpoint /login
     &{payload}                  Create Dictionary           email=${email_para_login}      password=${password_para_login}    
-    ${response}                 POST On Session           serverest       /login     data=&{payload}
+    ${response}                 POST On Session            serverest       /login     data=&{payload}
     Log to Console              Response: ${response.content}
     Set Global Variable         ${response}
 
@@ -23,10 +24,9 @@ Fazer Login e Armazenar Token
     Log To Console            Token Salvo: ${token_auth}
     Set Global Variable       ${token_auth}
 
-POST Realizar Login Invalido ${statuscode} 
-    &{payload}                  Create Dictionary           email=${email_para_login}      password=${password_para_login}    
-    ${response}                 POST On Session           serverest       /login         data=&{payload}
-    Log to Console              Response: ${response.content}
-    Set Global Variable         ${response} 
-
+##POST Realizar Login Invalido ${statuscode} 
+##    &{payload}                  Create Dictionary           email=${email_para_login}      password=${password_para_login}    
+##   ${response}                 POST On Session           serverest       /login         data=&{payload}
+##   Log to Console              Response: ${response.content}
+##   Set Global Variable         ${response} 
 

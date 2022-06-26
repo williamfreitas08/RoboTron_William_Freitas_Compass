@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation             Keywords e Variaveis para Ações do endpoint produtos
-
+Library                   RequestsLibrary
+Resource                  ./common.robot
 
 *** Keywords ***
 POST Endpoint /produtos
