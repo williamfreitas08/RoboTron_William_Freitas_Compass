@@ -54,5 +54,5 @@ Printar Conteudo Response
 Criar Usuario Estatico Valido
     ${json}            Importar JSON Estatico           json_usuario_ex.json
     ${payload}         Set Variable         ${json["user_valido"]}
-    Set Global Variable ${payload}
+    Set Global Variable        ${payload}
     POST Endpoint /usuarios

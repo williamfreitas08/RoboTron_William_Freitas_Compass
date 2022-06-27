@@ -1,7 +1,8 @@
 *** Settings ***
 Documentation             Keywords e Variaveis para Ações Gerais
-
+Library                   RequestsLibrary
 Library                   OperatingSystem
+
 
 
 *** Keywords ***
