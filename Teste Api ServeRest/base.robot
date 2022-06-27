@@ -99,6 +99,12 @@ Cenario: POST Criar Usuario de Massa Estatico 201
     Validar Status Code "201"
 
 ### ENPOINT/carrinhos ###
+Cenario: GET Buscar carrinhos
+    [tags]      BUSCARCARRINHOS
+    Criar Sessao
+    GET Endpoint /carrinhos
+    Validar Status Code "200"
+
 Cenario: POST Criar Carrinhos 201
     [Tags]       POSTCARRINHO
     Criar Sessao
