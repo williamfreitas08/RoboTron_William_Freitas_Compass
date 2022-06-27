@@ -1,11 +1,12 @@
 *** Settings ***
 Documentation             Keywords e Variaveis para Ações Gerais
+
 Library                   OperatingSystem
-Library                   RequestsLibrary
+
 
 *** Keywords ***
 Validar Status Code "${statuscode}"
-    Should Be True          ${response.status_code} == ${statuscode}
+    Should Be True        ${response.status_code} == ${statuscode}
 Importar JSON Estatico
     [Arguments]     ${nome_arquivo}
     ${arquivo}      Get File        ${EXECDIR}/${nome_arquivo}

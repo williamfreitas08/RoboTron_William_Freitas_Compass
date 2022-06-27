@@ -4,9 +4,25 @@ Library             RequestsLibrary
 Resource            ./usuarios_keywords.robot
 Resource            ./login_keywords.robot
 Resource            ./produtos_keywords.robot
+Resource    carrinho_keywords.robot
 
 #Sessão para criação dos cenários de teste
 *** Test Cases ***
+
+### ENPOINT/login ###
+Cenario: POST Realizar Login 200
+    [Tags]      POSTLOGIN
+    Criar Sessao
+    POST Endpoint /login
+    Validar Status Code "200"
+
+Cenario: POST Realizar Login email já cadastrado 400
+    [Tags]      POSTLOGINVALIDO
+    Criar Sessao
+    POST Endpoint /logininvalido
+    Validar Status Code "400"
+    Informar ocorrencia ERRO
+
 ### ENPOINT/usuarios ###
 Cenario: GET Todos os usuarios 200
     [Tags]      GET
@@ -40,18 +56,19 @@ Cenario: DELETE Deletar usuario 200
     DELETE Endpoint /usuarios
     Validar Status Code "200"
 
-### ENPOINT/login ###
-Cenario: POST Realizar Login 200
-    [Tags]      POSTLOGIN
+### ENPOINT/produtos ###
+Cenario: GET Todos os produtos 200
+    [Tags]      GETPRODUTO
     Criar Sessao
-    POST Endpoint /login
+    GET Endpoint /produtos
     Validar Status Code "200"
+    Validar Quantidade Produto "${3}"
 
-Cenario: POST Realizar Login email já cadastrado 400
-    [Tags]      POSTLOGINVALIDO
+Cenario: GET Buscar /usuarios/_id
+    [Tags]      GETPRODUTOID
     Criar Sessao
-    POST Endpoint /login
-    Validar Status Code "400"
+    GET Buscar /produtos/_id
+    Validar Status Code "200"
 
 Cenario: POST Criar Produto 201
     [Tags]       POSTPRODUTO
@@ -60,7 +77,6 @@ Cenario: POST Criar Produto 201
     POST Endpoint /produtos
     Validar Status Code "201"
 
-### ENPOINT/produtos ###
 Cenario: DELETE Excluir Produto 200
     [Tags]      DELETEPRODUTO
     Criar Sessao
@@ -69,11 +85,27 @@ Cenario: DELETE Excluir Produto 200
     DELETE Endpoint /produtos
     Validar Status Code "200"
 
+Cenario: PUT Editar produto/_id
+    [Tags]      PUTPRODUTO
+    Criar Sessao
+    Fazer Login e Armazenar Token
+    PUT Endpoint /produtos/_id
+    Validar Status Code "201"
+
 Cenario: POST Criar Usuario de Massa Estatico 201
     [Tags]      POSTCRIARUSUARIOESTATICO
     Criar Sessao
     Criar Usuario Estatico Valido
     Validar Status Code "201"
+
+### ENPOINT/carrinhos ###
+Cenario: POST Criar Carrinhos 201
+    [Tags]       POSTCARRINHO
+    Criar Sessao
+    Fazer Login e Armazenar Token
+    POST Endpoint /carrinhos
+    Validar Status Code "201"
+
 
 #Sessão para criação de Keywords Personalizadas
 *** Keywords ***
