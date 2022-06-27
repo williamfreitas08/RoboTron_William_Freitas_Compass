@@ -8,7 +8,7 @@ O presente repositório foi utilizado para a realização de teste automatizados
 - `Carrinhos`- Métodos: GET, POST, DELETE.
 
 ### Tecnologias Utilizadas
-- Robot Framework <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="15" height="15"/>
+- Robot Framework <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Robot-framework-logo.png" width="15" height="15"/>
 - Bibliotecas:
   - BuiltIn
   - RequestsLibrary
