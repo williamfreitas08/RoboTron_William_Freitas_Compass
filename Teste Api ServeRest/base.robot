@@ -4,7 +4,7 @@ Library             RequestsLibrary
 Resource            ./usuarios_keywords.robot
 Resource            ./login_keywords.robot
 Resource            ./produtos_keywords.robot
-Resource    carrinho_keywords.robot
+Resource            ./carrinho_keywords.robot
 
 #Sessão para criação dos cenários de teste
 *** Test Cases ***
